@@ -28,10 +28,10 @@ except Exception as e:
 
 LEG1 = 100
 LEG2 = 156
-PIVOTx = 30
-PIVOTy = 150
-START = (50, -25)
-STEP_LENGTH = 100
+PIVOTx = 0
+PIVOTy = 0
+START = (44, -214)
+STEP_LENGTH = 50
 
 
 class WalkingMechanism:
@@ -114,9 +114,9 @@ class WalkingMechanism:
         self.wristX = self.elbowX + self.arm2 * np.cos(self.alpha + self.beta)
         self.wristY = self.elbowY + self.arm2 * np.sin(self.alpha + self.beta)
 
-        self.alpha = np.rad2deg(self.alpha)
-        self.beta = np.rad2deg(self.beta)
-        return [f"{int(self.alpha.item())}", f"{int(self.beta.item())}", f"{0}"]
+        self.alpha = np.rad2deg(-(np.pi + self.alpha.item()))
+        self.beta = np.rad2deg(np.pi - self.beta.item())
+        return [f"{int(self.beta)}", f"{int(self.alpha)}", f"{0}"]
         # self.subplots(x, y, pX, pY)
 
     def swing_phase(self):
